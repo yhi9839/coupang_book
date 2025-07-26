@@ -1,103 +1,145 @@
-import Image from "next/image";
+import Link from 'next/link';
 
-export default function Home() {
+// A temporary component to render icons. Will be replaced with actual SVG icons later.
+const Icon = ({ name, className }: { name: string; className?: string }) => (
+  <div className={`w-6 h-6 flex items-center justify-center ${className}`}>
+    {/* Placeholder for actual icon */}
+    <span>{name.charAt(0)}</span>
+  </div>
+);
+
+// Mock data for book list
+const books = [
+  {
+    id: 1,
+    title: "넥서스",
+    author: "유발 하라리",
+    publisher: "김영사",
+    description: "로벌 베스트셀러 《사피엔스》 《호모 데우스》 《21세기를 위한 21가지 제언》으로 우리 시대 가장 중요한 사상가의 반열에 오른 유발 하라리 교수가 압도적 통찰로 AI 혁명의 의미와 본질을 꿰뚫어 보고 인류에게 남은 기회를 냉철하게 성찰하는 신작으로 돌아왔다.",
+    imageUrl: "", // Placeholder for image
+  },
+  {
+    id: 2,
+    title: "트렌드 코리아 2025",
+    author: "김난도",
+    publisher: "미래의창",
+    description: "2025년 대한민국 소비 트렌드를 전망하는 책. 새로운 기술과 사회 변화 속에서 나타나는 소비자의 욕망과 행동을 분석하고, 기업과 개인에게 필요한 전략을 제시한다.",
+    imageUrl: "",
+  },
+  {
+    id: 3,
+    title: "불변의 법칙",
+    author: "모건 하우절",
+    publisher: "서삼독",
+    description: "시대를 초월하여 변하지 않는 인간의 행동과 심리에 대한 통찰을 담은 책. 투자의 세계에서 반복되는 패턴을 통해 성공적인 의사결정의 원리를 탐구한다.",
+    imageUrl: "",
+  },
+];
+
+const BookCard = ({ book }: { book: (typeof books)[0] }) => (
+  <Link href={`/book/${book.id}`} className="block">
+    <div className="bg-white p-6 rounded-lg shadow-md flex gap-6 items-start w-full cursor-pointer hover:shadow-lg transition-shadow">
+      <div className="w-24 h-36 bg-gray-200 rounded flex-shrink-0"></div>
+      <div className="flex flex-col flex-grow">
+        <h3 className="text-lg font-bold mb-1">{book.title}</h3>
+        <p className="text-sm text-gray-500 mb-3">{book.author} | 출판 {book.publisher}</p>
+        <p className="text-sm text-gray-700 leading-relaxed line-clamp-3">{book.description}</p>
+      </div>
+      <div className="flex flex-col gap-2 w-28 flex-shrink-0">
+        <button className="w-full bg-stone-300 text-black py-2 rounded-md hover:bg-stone-400 transition-colors text-sm">선택하기</button>
+        <Link href={`/book/${book.id}`} className="w-full bg-white border border-stone-300 text-stone-600 py-2 rounded-md hover:bg-stone-100 transition-colors text-sm text-center">
+          상세보기
+        </Link>
+      </div>
+    </div>
+  </Link>
+);
+
+export default function ChaekmoHome() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Sidebar */}
+      <aside className="w-64 bg-[#F0F7F4] p-6 flex flex-col justify-between">
+        <div>
+          <div className="flex items-center gap-3 mb-10">
+            <div className="w-10 h-10 bg-green-200 rounded-full flex items-center justify-center font-bold text-lg">책</div>
+            <span className="text-2xl font-bold">책모</span>
+          </div>
+          <nav className="flex flex-col gap-4">
+            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+              <Icon name="Home" />
+              <span>홈</span>
+            </a>
+            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+              <Icon name="BookClub" />
+              <span>독서 모임</span>
+            </a>
+            <a href="#" className="flex items-center gap-3 p-2 rounded-md bg-green-200 font-bold text-green-800">
+              <Icon name="Search" />
+              <span>책 검색하기</span>
+            </a>
+            <div className="pl-8 flex flex-col gap-2 text-sm">
+              <a href="#" className="p-1 rounded-md hover:bg-green-200">통합검색</a>
+              <a href="#" className="p-1 rounded-md hover:bg-green-200">국내도서</a>
+              <a href="#" className="p-1 rounded-md hover:bg-green-200">전자책</a>
+            </div>
+            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+              <Icon name="Story" />
+              <span>책 이야기</span>
+            </a>
+            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+              <Icon name="MyPage" />
+              <span>마이페이지</span>
+            </a>
+          </nav>
+        </div>
+        <div className="flex flex-col gap-4">
+            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+              <Icon name="Settings" />
+              <span>환경설정</span>
+            </a>
+            <div className="bg-green-100 p-4 rounded-lg text-center">
+                <p className="text-sm mb-2">책모에 처음 오셨나요?</p>
+                <button className="bg-stone-300 text-sm text-black px-4 py-1 rounded-md hover:bg-stone-400">알아보기</button>
+            </div>
+        </div>
+      </aside>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Main Content */}
+      <main className="flex-1 p-10">
+        <header className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">통합 검색</h1>
+          <div className="flex items-center gap-4">
+            <Icon name="Notification" className="cursor-pointer"/>
+            <div className="flex items-center gap-2 cursor-pointer">
+                <div className="w-8 h-8 rounded-full bg-gray-300"></div>
+                <div>
+                    <p className="font-semibold">hy_0716</p>
+                    <p className="text-xs text-gray-500">책을 아는가? 나는 모른다</p>
+                </div>
+            </div>
+          </div>
+        </header>
+
+        <div className="mb-8">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="검색하기 (도서명, 작가)"
+              className="w-full p-4 pl-12 border rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-500">
+                <Icon name="Search" />
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          {books.map(book => (
+            <BookCard key={book.id} book={book} />
+          ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
