@@ -9,7 +9,16 @@ const Icon = ({ name, className }: { name: string; className?: string }) => (
 );
 
 // Mock data for book list
-const books = [
+export type Book = {
+  id: number;
+  title: string;
+  author: string;
+  publisher: string;
+  description: string;
+  imageUrl: string;
+};
+
+const books: Book[] = [
   {
     id: 1,
     title: "넥서스",
@@ -36,24 +45,8 @@ const books = [
   },
 ];
 
-const BookCard = ({ book }: { book: (typeof books)[0] }) => (
-  <Link href={`/book/${book.id}`} className="block">
-    <div className="bg-white p-6 rounded-lg shadow-md flex gap-6 items-start w-full cursor-pointer hover:shadow-lg transition-shadow">
-      <div className="w-24 h-36 bg-gray-200 rounded flex-shrink-0"></div>
-      <div className="flex flex-col flex-grow">
-        <h3 className="text-lg font-bold mb-1">{book.title}</h3>
-        <p className="text-sm text-gray-500 mb-3">{book.author} | 출판 {book.publisher}</p>
-        <p className="text-sm text-gray-700 leading-relaxed line-clamp-3">{book.description}</p>
-      </div>
-      <div className="flex flex-col gap-2 w-28 flex-shrink-0">
-        <button className="w-full bg-stone-300 text-black py-2 rounded-md hover:bg-stone-400 transition-colors text-sm">선택하기</button>
-        <Link href={`/book/${book.id}`} className="w-full bg-white border border-stone-300 text-stone-600 py-2 rounded-md hover:bg-stone-100 transition-colors text-sm text-center">
-          상세보기
-        </Link>
-      </div>
-    </div>
-  </Link>
-);
+import BookCard from '@/components/BookCard';
+
 
 export default function ChaekmoHome() {
   return (

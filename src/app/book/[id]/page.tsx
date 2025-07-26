@@ -1,3 +1,5 @@
+
+
 import Link from 'next/link';
 
 // Temporary icon component
@@ -46,38 +48,38 @@ export default async function BookDetailPage({ params }: { params: { id: string 
             <span className="text-2xl font-bold">책모</span>
           </div>
           <nav className="flex flex-col gap-4">
-            <a href="/" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+            <Link href="/" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
               <Icon name="Home" />
               <span>홈</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+            </Link>
+            <div className="flex items-center gap-3 p-2 rounded-md text-gray-400 cursor-not-allowed">
               <Icon name="BookClub" />
               <span>독서 모임</span>
-            </a>
-            <a href="/" className="flex items-center gap-3 p-2 rounded-md bg-green-200 font-bold text-green-800">
+            </div>
+            <Link href="/" className="flex items-center gap-3 p-2 rounded-md bg-green-200 font-bold text-green-800">
               <Icon name="Search" />
               <span>책 검색하기</span>
-            </a>
+            </Link>
              <div className="pl-8 flex flex-col gap-2 text-sm">
-              <a href="#" className="p-1 rounded-md hover:bg-green-200">통합검색</a>
-              <a href="#" className="p-1 rounded-md hover:bg-green-200">국내도서</a>
-              <a href="#" className="p-1 rounded-md hover:bg-green-200">전자책</a>
+              <Link href="/" className="p-1 rounded-md hover:bg-green-200">통합검색</Link>
+              <div className="p-1 rounded-md text-gray-400 cursor-not-allowed">국내도서</div>
+              <div className="p-1 rounded-md text-gray-400 cursor-not-allowed">전자책</div>
             </div>
-            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+            <div className="flex items-center gap-3 p-2 rounded-md text-gray-400 cursor-not-allowed">
               <Icon name="Story" />
               <span>책 이야기</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+            </div>
+            <div className="flex items-center gap-3 p-2 rounded-md text-gray-400 cursor-not-allowed">
               <Icon name="MyPage" />
               <span>마이페이지</span>
-            </a>
+            </div>
           </nav>
         </div>
         <div className="flex flex-col gap-4">
-            <a href="#" className="flex items-center gap-3 p-2 rounded-md hover:bg-green-200">
+            <div className="flex items-center gap-3 p-2 rounded-md text-gray-400 cursor-not-allowed">
               <Icon name="Settings" />
               <span>환경설정</span>
-            </a>
+            </div>
             <div className="bg-green-100 p-4 rounded-lg text-center">
                 <p className="text-sm mb-2">책모에 처음 오셨나요?</p>
                 <button className="bg-stone-300 text-sm text-black px-4 py-1 rounded-md hover:bg-stone-400">알아보기</button>
